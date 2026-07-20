@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#020b24" />
+    <meta name="description" content="Developer portfolio for 2tox." />
+    <title>2tox</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      .discord-card.live-presence .discord-avatar { background-image: var(--discord-avatar); background-position: center; background-size: cover; color: transparent; }
+      .discord-card.live-presence .discord-avatar .online-dot { background: #7d8592; }
+      .discord-card.live-presence.online .online-dot, .discord-card.live-presence .status-dot.online { background: #35d279; }
+      .discord-card.live-presence.idle .online-dot, .discord-card.live-presence .status-dot.idle { background: #f0b232; }
+      .discord-card.live-presence.dnd .online-dot, .discord-card.live-presence .status-dot.dnd { background: #ed4245; }
+      .discord-card.live-presence.offline .online-dot, .discord-card.live-presence .status-dot.offline { background: #7d8592; }
+      .discord-card.live-presence .discord-badges span { width: auto; padding: 0 6px; font-size: 8px; font-weight: 900; letter-spacing: .5px; }
+      .hero-copy { min-width: 0; }
+      .hero h1 { max-width: 100%; overflow-wrap: normal; }
+      @media (min-width: 769px) and (max-width: 1350px) {
+        .hero h1 { font-size: clamp(44px, 5.3vw, 67px); line-height: .97; }
+        .hero-layout { column-gap: 38px; }
+      } 
+    </style>
+  </head>
+  <body>
+    <div class="live-status glass-panel">
+
+    <span class="status-item">
+        👀 <span id="visitor-count">0</span>
+    </span>
+
+    <div class="divider"></div>
+
+    <span class="status-item">
+        <span class="online-dot-live"></span>
+        <span id="online-users">0 Online</span>
+    </span>
+
+</div>
+
+</div>
+    <canvas id="particles" aria-hidden="true"></canvas>
+    <div class="noise" aria-hidden="true"></div>
+    <div class="mouse-glow"></div>
+    <div class="cursor-dot" aria-hidden="true"></div>
+    <div class="cursor-ring" aria-hidden="true"></div>
+
+    <section class="enter-screen" id="enter-screen" aria-label="Enter portfolio">
+      <div class="enter-portal">
+        <i class="portal-ring ring-one"></i><i class="portal-ring ring-two"></i><i class="portal-ring ring-three"></i>
+        <div class="enter-center">
+          <span class="enter-title">2tox</span>
+          <button class="enter-action" id="enter-button" type="button">Click me</button>
+        </div>
+      </div>
+    </section>
+
+    <header class="site-header" id="site-header">
+      <nav class="nav-shell" aria-label="Main navigation">
+        <a class="brand" href="#hero" aria-label="2tox home"><span class="brand-mark"><code>&lt;/&gt;</code></span><span class="brand-word">2tox</span></a>
+        <div class="nav-links" id="nav-links">
+          <a class="active" href="#hero">Home</a><a href="#about">About</a><a href="#skills">Skills</a><a href="#services">Services</a></a>
+        </div>
+        <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Toggle menu" aria-expanded="false"><i></i><i></i><i></i></button>
+      </nav>
+      <div class="scroll-progress"><i id="scroll-progress"></i></div>
+    </header>
+
+    <aside class="music-player glass-panel" aria-label="Music player">
+      <div class="album-wrap"><img id="album-cover" src="https://i.scdn.co/image/ab67616d0000b273259d829263e138864210e6fc" alt="GMK album cover" referrerpolicy="no-referrer" /></div>
+      <div class="music-meta"><strong id="track-title">GMK</strong><span id="track-artist">WIXO &amp; LA2S</span></div>
+      <div class="track-progress"><i id="track-progress"></i></div>
+      <div class="music-controls"><button id="previous-track" type="button" aria-label="Previous track">‹</button><button class="play-button" id="play-track" type="button" aria-label="Play">▶</button><button id="next-track" type="button" aria-label="Next track">›</button></div>
+      <label class="volume"><span>◖</span><input id="volume" type="range" min="0" max="100" value="100" aria-label="Volume" /></label>
+      <audio id="track-audio" preload="metadata"></audio>
+    </aside>
+
+    <main>
+      <section class="hero section" id="hero">
+        <div class="hero-orb orb-a"></div><div class="hero-orb orb-b"></div>
+        <div class="hero-layout hero-shifted">
+          <div class="hero-copy reveal">
+            <article class="discord-card glass-panel" aria-label="Discord profile">
+              <div class="discord-banner"></div>
+              <div class="discord-avatar">
+    <div class="discord-avatar-decoration"></div>
+    <span class="online-dot"></span>
+</div>
+              <div class="discord-details"><div><strong>2tox</strong><span class="verified">✦</span></div><div class="discord-guild"></div><small><span class="status-dot"></span> Online</small></div>
+              <div class="discord-badges"><span>◈</span><span>◉</span><span>◆</span><span>✦</span></div>
+            </article>
+            <p class="eyebrow">Web Developer / Digital Marketing Specialist / Problem Solver</p>
+            <h1 aria-label="2tox"><span id="role-type">2tox</span><b class="typing-caret">|</b></h1>
+            <p class="hero-description"> Passionate about building modern websites and digital solutions. I help businesses and communities bring their ideas to life through web development, website optimization, and online marketing.</p>
+            <div class="hero-actions"><a class="button button-primary" href="#services">Explore Services <span>↗</span></a></div>
+          </div>
+          <div class="terminal reveal delay-1" aria-label="Code sample">
+            <div class="terminal-top"><span></span><span></span><span></span><b>vscode</b></div>
+            <pre id="terminal-code"></pre>
+          </div>
+        </div>
+        <a class="scroll-hint" href="#about"><i></i><span>Scroll to explore</span></a>
+      </section>
+      <div class="discord-add glass-panel">
+
+    <div class="discord-add-info">
+
+        <div class="discord-logo">💬</div>
+
+        <div>
+            <h3>Add me on Discord</h3>
+            <p>@2tox</p>
+        </div>
+
+    </div>
+
+    <a href="https://discord.com/users/1036696647389958207"
+       target="_blank"
+       class="discord-add-btn">
+        Add Friend
+    </a>
+
+</div>
+
+      <section class="about section" id="about">
+        <div class="section-orb about-orb"></div>
+        <div class="section-shell about-grid">
+          <div class="about-copy reveal">
+            <p class="section-label">About Me</p>
+            <h2>Get to Know me.</h2>
+            <p class="lead">I'm a 20-year-old developer from Germany with a passion for creating modern websites and digital solutions. I specialize in web development, website design, website optimization, and online marketing, helping businesses and brands build a strong online presence. Whether it's creating a website from scratch, improving an existing one, or increasing visibility through SEO and digital marketing, I focus on delivering fast, modern, and results-driven solutions tailored to every client.</p>
+            <h3>What I Offer</h3>
+            <div class="offer-grid">
+              <article><span>⚡</span><div><b>Web Development</b><p>Modern, fast, and responsive websites.</p></div></article>
+              <article><span>🎨</span><div><b>Website Design & Editing</b><p>Custom designs and professional website improvements.</p></div></article>
+              <article><span>📈</span><div><b>Online Marketing & SEO</b><p>Helping businesses grow their online presence.</p></div></article>
+              <article><span>🛠️</span><div><b>Reliable Support</b><p>Maintenance, updates, and long-term assistance.</p></div></article>
+            </div>
+            <div class="stats" id="stats">
+              <article class="glass-panel"><strong data-count="50">0</strong><b>+</b><span>Projects</span></article>
+              <article class="glass-panel"><strong data-count="25">0</strong><b>+</b><span>Clients</span></article>
+              <article class="glass-panel"><strong data-count="4">0</strong><b>+</b><span>Years</span></article>
+            </div>
+          </div>
+          <div class="timeline reveal delay-1">
+            <article><time>JULY 2022</time><div><i></i><h3>Getting Started</h3><p>I discovered my passion for web development and started learning HTML, CSS, JavaScript, and modern web technologies.</p></div></article>
+            <article><time>DECEMBER 2022</time><div><i></i><h3>First Projects</h3><p>I built my first websites, gained practical experience, and started working on projects for friends and small businesses.</p></div></article>
+            <article><time>JULY 2024</time><div><i></i><h3>Freelance Journey</h3><p>I began offering professional web development, website editing, and digital solutions for clients.</p></div></article>
+            <article><time>NOVEMBER 2025</time><div><i></i><h3>Expanding Services</h3><p>I expanded my expertise into online marketing, SEO, and website optimization, helping businesses improve their online presence.</p></div></article>
+            <article><time>MARCH 2026</time><div><i></i><h3>Growing Experience</h3><p>Successfully completed numerous client projects while focusing on performance, modern design, and long-term partnerships.</p></div></article>
+            <article><time>JULY 2026</time><div><i></i><h3>Today</h3><p>Continuing to help businesses and creators build modern websites, improve their digital presence, and achieve measurable results through web development and online marketing.</p></div></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="skills section" id="skills">
+        <div class="section-shell">
+          <div class="section-heading reveal"><p class="section-label">My Skills</p><h2>Skills &amp; Technologies</h2><p>The technologies and tools I use to build modern, high-performance websites and help businesses grow their online presence.</p></div>
+          <div class="skill-list">
+            <article class="skill-row reveal"><div class="skill-copy"><span>01</span><h3>Web Development</h3><p>Building modern, fast, and responsive websites tailored to businesses and personal brands.</p><div class="tags"><b>HTML5</b><b>CSS3</b><b>JavaScript</b><b>TypeScript</b><b>Responsive Design</b><b>Performance Optimization</b></div><div class="skill-level"><span>Skill-Level</span><b>95%</b></div><i class="level-bar"><em style="--level:95%"></em></i></div><div class="skill-visual"><svg viewBox="0 0 360 360" aria-hidden="true"><circle cx="180" cy="180" r="145"></circle><circle class="arc" style="--arc:910;--offset:45" cx="180" cy="180" r="145"></circle></svg><strong>⌘</strong></div></article>
+            <article class="skill-row reverse reveal"><div class="skill-copy"><span>02</span><h3>Frontend Development</h3><p>Creating modern and interactive user interfaces with a focus on user experience and clean design.</p><div class="tags"><b>React</b><b>Next.js</b><b>Tailwind CSS</b><b>Bootstrap</b><b>UI/UX</b><b>Framer Motion</b></div><div class="skill-level"><span>Skill-Level</span><b>92%</b></div><i class="level-bar"><em style="--level:92%"></em></i></div><div class="skill-visual"><svg viewBox="0 0 360 360" aria-hidden="true"><circle cx="180" cy="180" r="145"></circle><circle class="arc" style="--arc:910;--offset:91" cx="180" cy="180" r="145"></circle></svg><strong>JS</strong></div></article>
+            <article class="skill-row reveal"><div class="skill-copy"><span>03</span><h3>Backend & API Development</h3><p>Developing secure backend systems, REST APIs, authentication, and custom integrations.</p><div class="tags"><b>Node.js</b><b>Express.js</b><b>PHP</b><b>REST API</b><b>Authentication</b><b>Database Integration</b></div><div class="skill-level"><span>Skill-Level</span><b>90%</b></div><i class="level-bar"><em style="--level:90%"></em></i></div><div class="skill-visual"><svg viewBox="0 0 360 360" aria-hidden="true"><circle cx="180" cy="180" r="145"></circle><circle class="arc" style="--arc:910;--offset:109" cx="180" cy="180" r="145"></circle></svg><strong>API</strong></div></article>
+            <article class="skill-row reverse reveal"><div class="skill-copy"><span>04</span><h3>Database & CMS</h3><p>Managing databases and content management systems for scalable and maintainable web applications.</p><div class="tags"><b>MySQL</b><b>PostgreSQL</b><b>MongoDB</b><b>WordPress</b><b>Strapi</b><b>Prisma</b></div><div class="skill-level"><span>Skill-Level</span><b>88%</b></div><i class="level-bar"><em style="--level:88%"></em></i></div><div class="skill-visual"><svg viewBox="0 0 360 360" aria-hidden="true"><circle cx="180" cy="180" r="145"></circle><circle class="arc" style="--arc:910;--offset:54" cx="180" cy="180" r="145"></circle></svg><strong>DB</strong></div></article>
+            <article class="skill-row reveal"><div class="skill-copy"><span>05</span><h3>SEO & Digital Marketing</h3><p>Helping businesses increase their visibility through SEO, performance optimization, and digital marketing strategies.</p><div class="tags"><b>SEO</b><b>Google Analytics</b><b>Google Search Console</b><b>Performance Optimization</b><b>Social Media</b><b>Content Strategy</b></div><div class="skill-level"><span>Skill-Level</span><b>93%</b></div><i class="level-bar"><em style="--level:93%"></em></i></div><div class="skill-visual"><svg viewBox="0 0 360 360" aria-hidden="true"><circle cx="180" cy="180" r="145"></circle><circle class="arc" style="--arc:910;--offset:73" cx="180" cy="180" r="145"></circle></svg><strong>↗</strong></div></article>
+          </div>
+        </div>
+      </section>
+
+<div class="discord-profile-overlay" hidden>
+    <div class="discord-profile-modal">
+
+    <div class="profile-banner"></div>
+
+    <div class="profile-header">
+
+        <div class="profile-avatar">
+            <div class="profile-decoration"></div>
+            <div class="profile-status"></div>
+        </div>
+
+        <div class="profile-user">
+
+            <div class="profile-name-row">
+                <h2 class="profile-name"></h2>
+
+                <div class="profile-badges"></div>
+            </div>
+
+            <div class="profile-username"></div>
+
+        </div>
+
+    </div>
+
+    <div class="profile-section">
+        <h3>About Me</h3>
+
+        <div class="profile-about">
+            No bio available.
+        </div>
+    </div>
+
+    <div class="profile-section">
+
+        <h3>Activity</h3>
+
+       <div class="profile-section">
+    <h3>Member Since</h3>
+    <div class="profile-member-since"></div>
+</div>
+</div>
+    <div class="activity-card">
+
+        <div class="activity-image-wrapper">
+    <img class="activity-image" hidden>
+    <img class="activity-small-image" hidden>
+</div>
+
+        <div class="activity-content">
+
+            <strong class="activity-title"></strong>
+
+            <div class="activity-details"></div>
+
+            <small class="activity-state"></small>
+
+        </div>
+
+    </div>
+    
+</div>
+
+    </div>
+
+</div>
+</div>
+      <section class="services section" id="services">
+        <div class="section-shell"><div class="section-heading centered reveal"><p class="section-label">Services</p><h2>What I Offer</h2><p>Professional web development, modern design, and digital marketing solutions tailored to help businesses grow online.</p></div><div class="service-grid">
+          <article class="service-card reveal"><span class="service-index">01</span><div class="service-icon orange">⚡</div><h3>Website Development</h3><p>I build modern, responsive, and high-performance websites tailored to your business goals. Every website is optimized for speed, usability, and scalability.</p><button class="open-service" type="button" data-service="fivem">Explore service <span>→</span></button></article>
+          <article class="service-card reveal delay-1"><span class="service-index">02</span><div class="service-icon green">🛠️</div><h3>Website Editing & Maintenance</h3><p>Need changes or improvements? I update, optimize, and maintain existing websites to keep them secure, fast, and up to date.</p><button class="open-service" type="button" data-service="altv">Explore service <span>→</span></button></article>
+          <article class="service-card reveal delay-2"><span class="service-index">03</span><div class="service-icon purple">📈</div><h3>Online Marketing & SEO</h3><p>Increase your online visibility with SEO, performance optimization, and digital marketing strategies that help attract more customers.</p><button class="open-service" type="button" data-service="discord">Explore service <span>→</span></button></article>
+        </div></div>
+      </section>
+
+    <footer><span>© 2026 2tox</span><a href="#hero">Back to top ↑</a></footer>
+    <button class="contact-fab" id="contact-fab" type="button" aria-label="Open contact details"><span>Contact</span><b>✦</b></button>
+    <button class="to-top" id="to-top" type="button" aria-label="Back to top">↑</button>
+    <dialog id="details-modal"><button class="modal-close" type="button" aria-label="Close">×</button><span class="modal-kicker">Service</span><h2 id="modal-title"></h2><p id="modal-description"></p><h3>What I offer:</h3><ul id="modal-list"></ul><a class="button button-primary" id="modal-contact" href="https://discord.com/users/1073744296215318579" target="_blank" rel="noreferrer">Contact on Discord <span>↗</span></a></dialog>
+    <dialog id="contact-modal"><button class="modal-close" type="button" aria-label="Close">×</button><span class="modal-kicker">Let's talk</span><h2>Contact</h2><p>Have an idea for your community? Reach out and let's turn it into a working experience.</p><a class="discord-contact" href="https://discord.com/users/1073744296215318579" target="_blank" rel="noreferrer"><span>♧</span><div><small>Discord</small><b>2tox</b></div><i>↗</i></a><a class="discord-contact" href="https://github.com/jostar1337" target="_blank" rel="noreferrer"><span>◈</span><div><small>GitHub</small><b>jostar1337</b></div><i>↗</i></a></dialog>
+    <script src="js/discord.js"></script>
+    <script src="https://cdn.socket.io/4.8.3/socket.io.min.js"></script>
+<script src="app.js"></script>
+    
+  </body>
+</html>
