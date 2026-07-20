@@ -1,4 +1,4 @@
-const socket = io("http://localhost:3001");
+const socket = io();
 socket.on("connect", () => {
     console.log("🟢 Mit Socket.IO verbunden:", socket.id);
 });
@@ -329,7 +329,7 @@ loadStats();
 
 window.addEventListener("beforeunload", () => {
 
-    navigator.sendBeacon("/api/leave");
+   navigator.sendBeacon("/api/stats/leave");
 
 });
 // ===============================
