@@ -228,8 +228,31 @@ function showDiscordUnavailable() {
   card.querySelector(".discord-badges").innerHTML = "<span>OFFLINE</span>";
 }
 async function getDiscordPresence() {
+    try {
+
+        const response = await fetch("/api/profile");
+
+        if (!response.ok) {
+            throw new Error("API unavailable");
+        }
+
+        const profile = await response.json();
+
+        console.log(profile);
+
+        renderDiscordPresence(profile);
+
+    } catch (err) {
+
+        console.error(err);
+
+        showDiscordUnavailable();
+
+    }
+}
   try {
-    const response = await fetch("http://localhost:3001/api/profile");
+    const API_URL = window.location.origin;
+    
 
     if (!response.ok) {
       throw new Error("API unavailable");

@@ -331,41 +331,41 @@ async function loadDiscordProfile() {
         const res = await fetch("/api/profile");
         const data = await res.json();
 
-        console.log(data);
+        const card = document.querySelector(".discord-card");
+        const avatar = document.querySelector(".discord-avatar");
+        const banner = document.querySelector(".discord-banner");
+        const strong = document.querySelector(".discord-details strong");
+        const status = document.querySelector(".discord-details small");
+        const dot = document.querySelector(".status-dot");
+
+        // Username
+        strong.textContent = data.discord_user.username;
 
         // Avatar
-        const avatar = document.querySelector(".discord-avatar img");
+        avatar.style.backgroundImage =
+            `url(https://cdn.discordapp.com/avatars/${data.discord_user.id}/${data.discord_user.avatar}.png?size=512)`;
 
-        if (avatar) {
-            avatar.src =
-                `https://cdn.discordapp.com/avatars/${data.discord_user.id}/${data.discord_user.avatar}.png?size=512`;
-        }
+        avatar.style.backgroundSize = "cover";
+        avatar.style.backgroundPosition = "center";
 
         // Banner
-        const banner = document.querySelector(".discord-banner");
-
-        if (banner && data.profile.banner) {
+        if (data.profile.banner) {
             banner.style.backgroundImage =
                 `url(https://cdn.discordapp.com/banners/${data.discord_user.id}/${data.profile.banner}.png?size=1024)`;
+
             banner.style.backgroundSize = "cover";
             banner.style.backgroundPosition = "center";
         }
 
-        // Username
-        const username = document.querySelector(".discord-username");
-
-        if (username) {
-            username.textContent = data.discord_user.username;
-        }
-
         // Status
-        const status = document.querySelector(".discord-status");
+        status.innerHTML =
+            `<span class="status-dot"></span> ${data.discord_status}`;
 
-        if (status) {
-            status.textContent = data.discord_status;
-        }
+        card.classList.remove("online","idle","dnd","offline");
+        card.classList.add("live-presence");
+        card.classList.add(data.discord_status);
 
-    } catch (err) {
+    } catch(err){
         console.error(err);
     }
 }
