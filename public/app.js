@@ -326,6 +326,51 @@ async function loadStats(){
 }
 
 loadStats();
+async function loadDiscordProfile() {
+    try {
+        const res = await fetch("/api/profile");
+        const data = await res.json();
+
+        console.log(data);
+
+        // Avatar
+        const avatar = document.querySelector(".discord-avatar img");
+
+        if (avatar) {
+            avatar.src =
+                `https://cdn.discordapp.com/avatars/${data.discord_user.id}/${data.discord_user.avatar}.png?size=512`;
+        }
+
+        // Banner
+        const banner = document.querySelector(".discord-banner");
+
+        if (banner && data.profile.banner) {
+            banner.style.backgroundImage =
+                `url(https://cdn.discordapp.com/banners/${data.discord_user.id}/${data.profile.banner}.png?size=1024)`;
+            banner.style.backgroundSize = "cover";
+            banner.style.backgroundPosition = "center";
+        }
+
+        // Username
+        const username = document.querySelector(".discord-username");
+
+        if (username) {
+            username.textContent = data.discord_user.username;
+        }
+
+        // Status
+        const status = document.querySelector(".discord-status");
+
+        if (status) {
+            status.textContent = data.discord_status;
+        }
+
+    } catch (err) {
+        console.error(err);
+    }
+}
+
+loadDiscordProfile();
 
 window.addEventListener("beforeunload", () => {
 
