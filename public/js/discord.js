@@ -144,7 +144,15 @@ if (decoration?.asset) {
     document.querySelector(".discord-avatar-decoration").style.backgroundImage = "";
 }
   const status = ["online", "idle", "dnd", "offline"].includes(presence.discord_status) ? presence.discord_status : "offline";
-  const statusLabels = { online: "Online", idle: "Idle", dnd: "Do not disturb", offline: "Offline" };
+const statusText = {
+    online: "Online",
+    idle: "Idle",
+    dnd: "Do Not Disturb",
+    offline: "Offline"
+};
+
+status.innerHTML =
+    `<span class="status-dot"></span> ${statusText[data.discord_status]}`;
   const spotify = presence.spotify;
   const customActivity = presence.activities?.find(activity => activity.type === 4 && activity.state);
   const appActivity = presence.activities?.find(activity => activity.type !== 4);
