@@ -229,11 +229,12 @@ bannerElement.style.backgroundPosition = "center";
   card.querySelector(".discord-badges").innerHTML = badgeHtml + liveTag;
 }
 function showDiscordUnavailable() {
-  const card = document.querySelector(".discord-card");
-  card.classList.add("live-presence", "offline");
-  card.querySelector(".discord-details strong").textContent = "Discord";
-  card.querySelector(".discord-details small").innerHTML = '<span class="status-dot offline"></span>Lanyard not connected';
-  card.querySelector(".discord-badges").innerHTML = "<span>OFFLINE</span>";
+    const card = document.querySelector(".discord-card");
+    card.classList.add("live-presence", "offline");
+    card.querySelector(".discord-details strong").textContent = "Discord";
+    card.querySelector(".discord-details small").innerHTML =
+        '<span class="status-dot offline"></span>Lanyard not connected';
+    card.querySelector(".discord-badges").innerHTML = "<span>OFFLINE</span>";
 }
 async function getDiscordPresence() {
     try {
@@ -276,8 +277,6 @@ async function getDiscordPresence() {
     console.error(err);
     showDiscordUnavailable();
   }
-
-}
 function connectDiscordPresence() {
   let heartbeat;
   const socket = new WebSocket("wss://api.lanyard.rest/socket");
