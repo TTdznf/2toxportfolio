@@ -259,24 +259,25 @@ async function getDiscordPresence() {
 
     }
 }
-  try {
-    const API_URL = window.location.origin;
-    
+async function getDiscordPresence() {
+    try {
+        const response = await fetch("/api/profile");
 
-    if (!response.ok) {
-      throw new Error("API unavailable");
+        if (!response.ok) {
+            throw new Error("API unavailable");
+        }
+
+        const profile = await response.json();
+
+        console.log(profile);
+
+        renderDiscordPresence(profile);
+
+    } catch (err) {
+        console.error(err);
+        showDiscordUnavailable();
     }
-
-    const profile = await response.json();
-
-    console.log(profile);
-
-    renderDiscordPresence(profile);
-
-  } catch (err) {
-    console.error(err);
-    showDiscordUnavailable();
-  }
+}
 function connectDiscordPresence() {
   let heartbeat;
   const socket = new WebSocket("wss://api.lanyard.rest/socket");
