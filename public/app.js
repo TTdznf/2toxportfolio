@@ -357,10 +357,6 @@ async function loadDiscordProfile() {
             banner.style.backgroundPosition = "center";
         }
 
-        // Status
-        status.innerHTML =
-            `<span class="status-dot"></span> ${data.discord_status}`;
-
         card.classList.remove("online","idle","dnd","offline");
         card.classList.add("live-presence");
         card.classList.add(data.discord_status);

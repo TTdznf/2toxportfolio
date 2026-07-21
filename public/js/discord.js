@@ -134,6 +134,12 @@ function renderDiscordPresence(presence) {
   const user = presence.discord_user;
   console.log(presence.profile);
   const decoration = user.avatar_decoration_data;
+  const statusLabels = {
+    online: "Online",
+    idle: "Idle",
+    dnd: "Do Not Disturb",
+    offline: "Offline"
+};
 
 if (decoration?.asset) {
     const url = `https://cdn.discordapp.com/avatar-decoration-presets/${decoration.asset}.png`;
@@ -143,16 +149,9 @@ if (decoration?.asset) {
 } else {
     document.querySelector(".discord-avatar-decoration").style.backgroundImage = "";
 }
-  const status = ["online", "idle", "dnd", "offline"].includes(presence.discord_status) ? presence.discord_status : "offline";
-const statusText = {
-    online: "Online",
-    idle: "Idle",
-    dnd: "Do Not Disturb",
-    offline: "Offline"
-};
-
-status.innerHTML =
-    `<span class="status-dot"></span> ${statusText[data.discord_status]}`;
+ const status = ["online", "idle", "dnd", "offline"].includes(presence.discord_status)
+    ? presence.discord_status
+    : "offline";
   const spotify = presence.spotify;
   const customActivity = presence.activities?.find(activity => activity.type === 4 && activity.state);
   const appActivity = presence.activities?.find(activity => activity.type !== 4);
@@ -193,7 +192,6 @@ bannerElement.style.backgroundPosition = "center";
   card.setAttribute("aria-label", `${user.global_name || user.display_name || user.username}: ${statusLabels[status]}. ${activity}`);
   card.querySelector(".discord-avatar").firstChild.textContent = "";
   card.querySelector(".discord-details strong").textContent = user.global_name || user.display_name || user.username;
-  card.querySelector(".discord-details small").innerHTML = `<span class="status-dot ${status}"></span>${statusLabels[status]} - ${activity}`;
   const badges = realBadges(user);
   if (presence.profile?.nitro) {
     badges.unshift({
@@ -257,25 +255,6 @@ async function getDiscordPresence() {
 
         showDiscordUnavailable();
 
-    }
-}
-async function getDiscordPresence() {
-    try {
-        const response = await fetch("/api/profile");
-
-        if (!response.ok) {
-            throw new Error("API unavailable");
-        }
-
-        const profile = await response.json();
-
-        console.log(profile);
-
-        renderDiscordPresence(profile);
-
-    } catch (err) {
-        console.error(err);
-        showDiscordUnavailable();
     }
 }
 function connectDiscordPresence() {
